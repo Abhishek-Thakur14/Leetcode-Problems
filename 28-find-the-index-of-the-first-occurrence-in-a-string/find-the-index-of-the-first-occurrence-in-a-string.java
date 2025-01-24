@@ -1,6 +1,6 @@
 class Solution {
     public int strStr(String haystack, String needle) {
-         // Iterate through all possible starting positions in haystack where needle could fit
+ 
        for (int i = 0; i <= haystack.length() - needle.length(); i++) {
           int k;
           // Check if needle matches the substring of haystack starting at index i
