@@ -1,22 +1,12 @@
 class Solution {
-    public int strStr(String haystack, String needle) {
- 
-       for (int i = 0; i <= haystack.length() - needle.length(); i++) {
-          int k;
-          // Check if needle matches the substring of haystack starting at index i
-          for (k = 0; k < needle.length(); k++) {
-                if (haystack.charAt(i + k) != needle.charAt(k)) {
-                    break; // Exit inner loop if characters don't match
-                }
-          }
-          // If all characters of needle matched, return the starting index
-          if (k == needle.length()) {
-             return i;
-          }
-        }
-        // If no match is found, return -1
-        return -1;
+  public int strStr(String haystack, String needle) {
+    final int m = haystack.length();
+    final int n = needle.length();
 
-    }
-    
+    for (int i = 0; i < m - n + 1; ++i)
+      if (haystack.substring(i, i + n).equals(needle))
+        return i;
+
+    return -1;
+  }
 }
