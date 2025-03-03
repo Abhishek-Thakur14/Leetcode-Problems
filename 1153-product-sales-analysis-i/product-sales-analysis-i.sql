@@ -1,7 +1,7 @@
-# Write your MySQL query statement below
-select
-Product.product_name,
-Sales.year,
-Sales.price
-from Sales
-inner join Product using(product_id);
+SELECT
+  Product.product_name,
+  Sales.year,
+  Sales.price
+FROM Sales
+INNER JOIN Product
+  USING (product_id);
