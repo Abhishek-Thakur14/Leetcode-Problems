@@ -1,51 +1,22 @@
 class Solution {
-    /**
-     * Checks if the array follows a trionic pattern:
-     * 1. Strictly increasing sequence
-     * 2. Followed by strictly decreasing sequence  
-     * 3. Followed by strictly increasing sequence
-     * All three segments must exist with at least one element each.
-     * 
-     * @param nums input array to check
-     * @return true if array follows trionic pattern, false otherwise
-     */
     public boolean isTrionic(int[] nums) {
-        int arrayLength = nums.length;
-        int currentIndex = 0;
-      
-        // Phase 1: Find the first strictly increasing segment
-        // Move forward while elements are strictly increasing
-        while (currentIndex < arrayLength - 2 && nums[currentIndex] < nums[currentIndex + 1]) {
-            currentIndex++;
-        }
-      
-        // If no increasing segment found at the beginning, pattern is invalid
-        if (currentIndex == 0) {
-            return false;
-        }
-      
-        // Phase 2: Find the strictly decreasing segment
-        // Save the peak position where decreasing starts
-        int peakIndex = currentIndex;
-      
-        // Move forward while elements are strictly decreasing
-        while (currentIndex < arrayLength - 1 && nums[currentIndex] > nums[currentIndex + 1]) {
-            currentIndex++;
-        }
-      
-        // Check if decreasing segment exists and doesn't reach the end
-        // (we need room for the final increasing segment)
-        if (currentIndex == peakIndex || currentIndex == arrayLength - 1) {
-            return false;
-        }
-      
-        // Phase 3: Find the final strictly increasing segment
-        // Move forward while elements are strictly increasing
-        while (currentIndex < arrayLength - 1 && nums[currentIndex] < nums[currentIndex + 1]) {
-            currentIndex++;
-        }
-      
-        // Pattern is valid only if we've reached the end of the array
-        return currentIndex == arrayLength - 1;
+        int n = nums.length;
+        if (n < 3) return false;
+
+        int i = 0;
+
+        // Phase 1: strictly increasing
+        while (i + 1 < n && nums[i] < nums[i + 1]) i++;
+        if (i == 0) return false;
+
+        // Phase 2: strictly decreasing
+        int mid = i;
+        while (i + 1 < n && nums[i] > nums[i + 1]) i++;
+        if (i == mid || i == n - 1) return false;
+
+        // Phase 3: strictly increasing
+        while (i + 1 < n && nums[i] < nums[i + 1]) i++;
+
+        return i == n - 1;
     }
 }
