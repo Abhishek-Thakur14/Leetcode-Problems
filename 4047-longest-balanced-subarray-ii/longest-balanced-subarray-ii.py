@@ -2,7 +2,6 @@ class Solution:
     def longestBalanced(self, nums: List[int]) -> int:
         n = len(nums)
 
-        # 线段树节点
         class Node:
             __slots__ = ("l", "r", "mn", "mx", "lazy")
             def __init__(self):
@@ -12,7 +11,6 @@ class Solution:
 
         tr = [Node() for _ in range((n + 1) * 4)]
 
-        # 建树，维护前缀和区间 [0, n]
         def build(u: int, l: int, r: int):
             tr[u].l, tr[u].r = l, r
             tr[u].mn = tr[u].mx = tr[u].lazy = 0
@@ -37,7 +35,6 @@ class Solution:
             tr[u].mn = min(tr[u << 1].mn, tr[u << 1 | 1].mn)
             tr[u].mx = max(tr[u << 1].mx, tr[u << 1 | 1].mx)
 
-        # 区间加
         def modify(u: int, l: int, r: int, v: int):
             if tr[u].l >= l and tr[u].r <= r:
                 apply(u, v)
@@ -50,7 +47,6 @@ class Solution:
                 modify(u << 1 | 1, l, r, v)
             pushup(u)
 
-        # 线段树上二分，找最小 pos 使前缀和 == target
         def query(u: int, target: int) -> int:
             if tr[u].l == tr[u].r:
                 return tr[u].l
