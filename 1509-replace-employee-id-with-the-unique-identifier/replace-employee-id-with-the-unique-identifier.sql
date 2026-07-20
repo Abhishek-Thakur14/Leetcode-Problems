@@ -1,7 +1,5 @@
 # Write your MySQL query statement below
-SELECT
-  EmployeeUNI.unique_id,
-  Employees.name
-FROM Employees
-LEFT JOIN EmployeeUNI
-  USING (id);
+select unique_id,name
+from employees e
+left join employeeUNI eu
+on e.id=eu.id;
