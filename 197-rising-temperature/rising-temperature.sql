@@ -1,6 +1,5 @@
-# Write your MySQL query statement below
-SELECT Today.id
-FROM Weather AS Today
-INNER JOIN Weather AS Yesterday
-  ON (DATE_SUB(Today.recordDate, INTERVAL 1 DAY) = Yesterday.recordDate)
-WHERE Today.temperature > Yesterday.temperature;
+select w.id
+from weather w
+join weather we
+on datediff(w.recordDate, we.recordDate) = 1
+where w.temperature > we.temperature;
